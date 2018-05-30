@@ -1,0 +1,142 @@
+package service.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import dao.HaqDao;
+import entity.Pro;
+import entity.Supplier;
+import entity.SupplierOrder;
+import entity.User;
+import service.HaqService;
+import util.CreateMD5;
+@Service
+public class HaqServiceImpl implements HaqService{
+
+	@Autowired
+	HaqDao haqDao;
+	
+	/*******************************************method start****************************************************/
+	
+	/**
+	 * 用户信息修改-根据用户编码获取用户实体类对象信息
+	 * @param userId
+	 * @return user
+	 * @author haq
+	 * @time 2018年5月6日17:41:48
+	 */
+	public User getUserInfoById(String userId) {
+		return haqDao.getUserInfoById(userId);
+	}
+
+	/**
+	 * 用户信息修改-点击保存按钮 修改用户信息
+	 * @param user
+	 * @return boolean
+	 * @author haq
+	 * @time 2018年5月6日18:55:54
+	 */
+	public boolean modifyUserInfo(User user) {
+		boolean flag =false;
+		//获取加密后的密码存入数据库
+		user.setPassword(CreateMD5.getMd5(user.getPassword()));
+		int res =haqDao.modifyUserInfoById(user);
+		if(res>0){
+			flag=true;
+		}
+		return flag;
+	}
+
+	/**
+	 * 用户信息删除
+	 * @param userId
+	 * @return boolean
+	 * @author haq
+	 * @time 2018年5月6日19:32:22
+	 */
+	public boolean deleteUserById(String userId) {
+		boolean flag =false;
+		int res  = haqDao.deleteUserById(userId);
+		if(res>0){
+			flag = true;
+		}
+		return flag;
+	}
+
+	public List<User> searchUserForManage(User user) {
+		return haqDao.searchUserForManage(user);
+	}
+
+	public List<Supplier> getListForSupplier(Supplier supplier) {
+		return haqDao.getListForSupplier(supplier);
+	}
+
+	public Supplier getDTOForSupplier(Supplier supplier) {
+		return haqDao.getDTOForSupplier(supplier);
+	}
+
+	public boolean doSupplierModify(Supplier supplier) {
+		boolean flag =false;
+		int res  = haqDao.doSupplierModify(supplier);
+		if(res>0){
+			flag = true;
+		}
+		return flag;
+	}
+
+	public boolean deleteSupplierById(Supplier supplier) {
+		boolean flag =false;
+		int res  = haqDao.deleteSupplierById(supplier);
+		if(res>0){
+			flag = true;
+		}
+		return flag;
+	}
+
+	public boolean addSupplier(Supplier supplier) {
+		boolean flag =false;
+		int res  = haqDao.addSupplier(supplier);
+		if(res>0){
+			flag = true;
+		}
+		return flag;
+	}
+
+	public List<SupplierOrder> getListForSupplierOrder(
+			SupplierOrder supplierOrder) {
+		return haqDao.getListForSupplierOrder(supplierOrder);
+	}
+
+	public SupplierOrder getDTOFotSupplierOrder(SupplierOrder supplierOrder) {
+		return haqDao.getDTOFotSupplierOrder(supplierOrder);
+	}
+
+	public boolean doSupplierOrderModify(SupplierOrder supplierOrder) {
+		boolean flag =false;
+		int res  = haqDao.doSupplierOrderModify(supplierOrder);
+		if(res>0){
+			flag = true;
+		}
+		return flag;
+	}
+
+	public boolean deleteSupplierOrderById(SupplierOrder supplierOrder) {
+		boolean flag =false;
+		int res  = haqDao.deleteSupplierOrderById(supplierOrder);
+		if(res>0){
+			flag = true;
+		}
+		return flag;
+	}
+
+	public List<Pro> getListForPro() {
+		return haqDao.getListForPro();
+	}
+
+	public boolean addSupplierOrder(SupplierOrder supplierOrder) {
+		
+		return false;
+	} 
+}

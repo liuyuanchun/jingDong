@@ -1,0 +1,13 @@
+package entity;
+
+import java.io.Serializable;
+
+public class Pro implements Serializable{
+
+	private static final long serialVersionUID = -8787066765522171071L;
+	
+	private String id;
+	
+	private String proName;
+
+}

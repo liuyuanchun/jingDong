@@ -1,0 +1,15 @@
+package entity;
+
+import java.io.Serializable;
+
+public class SupplierOrder implements Serializable{
+
+	private static final long serialVersionUID = -2782924442293456593L;
+	
+	private String id;
+	
+	private String supplierCode;
+	
+	private String supplierName;
+
+}

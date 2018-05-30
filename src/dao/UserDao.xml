@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC   
+    "-//mybatis.org//DTD Mapper 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dao.UserDao">
+
+	<insert id="addUser" >
+		INSERT INTO users (username,PASSWORD,telphone,type) VALUES(#{username},#{password},#{telphone},'普通用户');
+	</insert>
+	
+	<select id="doLogin" resultType="entity.User">
+		SELECT * FROM users WHERE username=#{username} AND PASSWORD = #{password}; 
+	</select>
+	
+	<select id="selectAllUser" resultType="entity.User">
+		SELECT * FROM users;
+	</select>
+	
+	<update id="updateUser">
+		UPDATE users SET PASSWORD =#{password} WHERE id = #{id};
+	</update>
+</mapper> 
+    

@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC   
+    "-//mybatis.org//DTD Mapper 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dao.TypeDao">
+
+<select id="searchAllType" resultMap="bigTypeAndSmallType">
+		 SELECT b.id AS bId,b.name AS bName,s.id AS sId, s.name AS sName FROM big_type AS b LEFT JOIN small_type AS s ON b.id = s.b_id;
+	</select>
+	<resultMap type="entity.BigType" id="bigTypeAndSmallType">
+		<id property="id" column="bId"/>
+		<result property="name" column="bName"/>
+		<collection property="smallType" column="b_id" ofType="entity.SmallType">
+			<id property="id" column="sId"/>
+			<result property="name" column="sName"/>
+		</collection>
+	</resultMap>
+	
+	
+	<select id="searchSTypeBybId" resultMap="smallType">
+		SELECT s.id,s.name,b.id as bId,b.name as bName from small_type as s 
+		inner join big_type as b on b.id = s.b_id where b_id=#{bId};
+	</select>
+	<resultMap type="entity.SmallType" id="smallType">
+		<id property="id" column="id"/>
+		<result property="name" column="name"/>
+		<association property="bigType" column="b_id" javaType="entity.BigType">
+			<id property="id" column="bId"/>
+			<result property="name" column="bName"/>
+		</association>
+	</resultMap>
+	
+	<insert id="insertBType" parameterType="String">
+		INSERT INTO big_type(NAME) VALUE(#{bName});
+	</insert>
+	
+	<insert id="insertSType">
+		INSERT INTO small_type(NAME,b_id) VALUE(#{sName},#{bId});
+	</insert>
+	
+	<delete id="deleteSType">
+		DELETE FROM small_type WHERE id = #{sId};
+	</delete>
+	
+	<update id="modifySType">
+		UPDATE small_type SET NAME =#{nsName} WHERE id=#{sId};
+	</update>
+</mapper> 
+    

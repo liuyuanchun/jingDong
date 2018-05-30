@@ -1,0 +1,92 @@
+package entity;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
+
+public class SupplierOrder implements Serializable{
+
+	private static final long serialVersionUID = -2782924442293456593L;
+	
+	private String id;
+	
+	private String supplierCode;
+	
+	private String supplierName;
+	
+	private String proCode;
+	
+	private String proName;
+	
+	private BigDecimal proPrice;
+	
+	private int count;
+	
+	private BigDecimal price;
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getSupplierCode() {
+		return supplierCode;
+	}
+
+	public void setSupplierCode(String supplierCode) {
+		this.supplierCode = supplierCode;
+	}
+
+	public String getSupplierName() {
+		return supplierName;
+	}
+
+	public void setSupplierName(String supplierName) {
+		this.supplierName = supplierName;
+	}
+
+	public String getProCode() {
+		return proCode;
+	}
+
+	public void setProCode(String proCode) {
+		this.proCode = proCode;
+	}
+
+	public String getProName() {
+		return proName;
+	}
+
+	public void setProName(String proName) {
+		this.proName = proName;
+	}
+
+	public BigDecimal getProPrice() {
+		return proPrice;
+	}
+
+	public void setProPrice(BigDecimal proPrice) {
+		this.proPrice = proPrice;
+	}
+
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
+	}
+
+	public BigDecimal getPrice() {
+		return price;
+	}
+
+	public void setPrice(BigDecimal price) {
+		this.price = price;
+	}
+	
+	
+
+}

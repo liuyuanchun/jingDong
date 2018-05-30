@@ -1,0 +1,17 @@
+127.0.0.1 - - [09/May/2018:14:05:49 +0800] "GET / HTTP/1.1" 404 951
+0:0:0:0:0:0:0:1 - - [09/May/2018:14:06:45 +0800] "GET /jingDong/showManage HTTP/1.1" 302 -
+0:0:0:0:0:0:0:1 - - [09/May/2018:14:06:46 +0800] "GET /jingDong/showLogin HTTP/1.1" 200 4550
+0:0:0:0:0:0:0:1 - - [09/May/2018:14:06:46 +0800] "GET /favicon.ico HTTP/1.1" 404 973
+0:0:0:0:0:0:0:1 - - [09/May/2018:14:06:49 +0800] "POST /jingDong/doLogin HTTP/1.1" 302 -
+0:0:0:0:0:0:0:1 - - [09/May/2018:14:06:49 +0800] "GET /jingDong/showMain HTTP/1.1" 200 11423
+0:0:0:0:0:0:0:1 - - [09/May/2018:14:06:49 +0800] "GET /jingDong/header HTTP/1.1" 200 3344
+0:0:0:0:0:0:0:1 - - [09/May/2018:14:06:49 +0800] "GET /jingDong/footer HTTP/1.1" 200 513
+0:0:0:0:0:0:0:1 - - [09/May/2018:14:06:52 +0800] "GET /jingDong/showManage HTTP/1.1" 200 1370
+0:0:0:0:0:0:0:1 - - [09/May/2018:14:06:52 +0800] "GET /jingDong/MHeader HTTP/1.1" 200 930
+0:0:0:0:0:0:0:1 - - [09/May/2018:14:06:52 +0800] "GET /jingDong/MFooter HTTP/1.1" 200 696
+0:0:0:0:0:0:0:1 - - [09/May/2018:14:06:52 +0800] "GET /jingDong/MLeft HTTP/1.1" 200 3244
+0:0:0:0:0:0:0:1 - - [09/May/2018:14:06:52 +0800] "GET /jingDong/showMProduct HTTP/1.1" 200 8020
+0:0:0:0:0:0:0:1 - - [09/May/2018:14:06:52 +0800] "GET /jingDong/managePicture/983e0485-3aca-4125-a44e-b0f517df7e1f.jpg HTTP/1.1" 404 949
+0:0:0:0:0:0:0:1 - - [09/May/2018:14:06:52 +0800] "GET /jingDong/managePicture/adeef271-dbd5-4860-9436-367acd5c605c.jpg HTTP/1.1" 404 949
+0:0:0:0:0:0:0:1 - - [09/May/2018:14:06:54 +0800] "GET /jingDong/showMUser HTTP/1.1" 200 5031
+0:0:0:0:0:0:0:1 - - [09/May/2018:14:08:06 +0800] "GET /jingDong/showMOrder HTTP/1.1" 500 5166

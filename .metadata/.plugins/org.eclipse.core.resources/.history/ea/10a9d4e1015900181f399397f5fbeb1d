@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC   
+    "-//mybatis.org//DTD Mapper 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dao.HaqDao">
+	<!-- 用户信息模块 -->
+		<!-- 获取单个用户信息  -->
+		<select id="getUserInfoById" resultType="entity.User">
+			SELECT T.id,T.username,T.`password`,T.telphone,T.type FROM USERS T WHERE T.id =#{userId};
+		</select>
+		<!-- 修改用户信息 -->
+		<update id="modifyUserInfoById">
+			UPDATE USERS T SET T.USERNAME = #{username},T.`password`=#{password},T.telphone=#{telphone} WHERE T.id =#{id}
+		</update>
+		<!-- 删除用户 -->
+		<delete id="deleteUserById">
+			DELETE FROM USERS WHERE ID = #{userId}
+		</delete>
+		
+		<!-- 获取单个用户信息  -->
+		<select id="searchUserForManage" resultType="entity.User">
+			SELECT T.id,T.username,T.`password`,T.telphone,T.type FROM USERS T WHERE 1=1 
+			<if test="username != null and username != '' ">
+			AND T.username LIKE concat(concat('%',#{username}),'%')
+			</if>
+			<if test="telphone != null and telphone != '' ">
+			AND T.telphone LIKE concat(concat('%',#{telphone}),'%')
+			</if>
+		</select>
+		
+		<!-- 获取供应商列表  -->
+		<resultMap type="entity.Supplier" id="supplierDTO">
+			<result column="SUPPLIER_NAME" property="supplierName" />
+			<result column="SUPPLIER_CODE" property="supplierCode" />
+			<result column="SUPPLIER_TYPE" property="supplierType" />
+			<result column="ID" property="id" />
+		</resultMap>
+		<select id="getListForSupplier" resultMap="supplierDTO">
+			SELECT * FROM supplier_info T  WHERE 1=1 
+			<if test="supplierName != null and supplierName != '' ">
+				AND T.supplier_name LIKE concat(concat('%',#{supplierName}),'%')
+			</if>
+			<if test="supplierType != null and supplierType != '' ">
+				AND T.supplier_type LIKE concat(concat('%',#{supplierType}),'%')
+			</if>
+		</select>
+		
+		<select id="getDTOForSupplier" resultMap="supplierDTO">
+			SELECT * FROM supplier_info T  WHERE T.id =#{id}
+		</select>
+		
+		<!-- 修改供应商信息 -->
+		<update id="doSupplierModify">
+			UPDATE supplier_info T SET T.supplier_code=#{supplierCode},T.supplier_name=#{supplierName} WHERE T.id=#{id}
+		</update>
+		
+		<!-- 删除供应商 -->
+		<delete id="deleteSupplierById">
+			DELETE FROM supplier_info  WHERE ID =#{id}
+		</delete>
+		
+		<insert id="addSupplier">
+			INSERT into supplier_info  (supplier_code,supplier_name,supplier_type)
+			values(#{supplierCode},#{supplierName},#{supplierType})
+		</insert>
+		
+		<!-- 获取供应商列表  -->
+		<resultMap type="entity.SupplierOrder" id="getListForSupplierOrder">
+			<result column="SUPPLIER_NAME" property="supplierName" />
+			<result column="SUPPLIER_CODE" property="supplierCode" />
+			<result column="SUPPLIER_TYPE" property="supplierType" />
+			<result column="pro_code" property="proCode" />
+			<result column="pro_name" property="proName" />
+			<result column="pro_price" property="proPrice" />
+			<result column="count" property="count" />
+			<result column="price" property="price" />
+			<result column="note" property="note" />
+			<result column="ID" property="id" />
+		</resultMap>
+		<select id="getListForSupplierOrder" resultMap="getListForSupplierOrder">
+					SELECT
+						P.ID,
+						T.supplier_code,
+						T.supplier_name,
+						T.supplier_type,
+						S.pro_code,
+						S.pro_name,
+						S.pro_price,
+						P.count,
+						P.price,
+						p.note
+					FROM
+						supplier_info T
+					INNER JOIN s_pro S ON T.id = S.supplier_id
+					INNER JOIN supplier_pro P ON s.id = p.pro_id
+					WHERE
+						1 = 1
+			<if test="supplierName != null and supplierName != '' ">
+				AND T.supplier_name LIKE concat(concat('%',#{supplierName}),'%')
+			</if>
+			<if test="proName != null and proName != '' ">
+				AND S.pro_name LIKE concat(concat('%',#{proName}),'%')
+			</if>
+		</select>
+		
+		<select id="getDTOFotSupplierOrder" resultMap="getListForSupplierOrder">
+					SELECT
+						P.ID,
+						T.supplier_code,
+						T.supplier_name,
+						T.supplier_type,
+						S.pro_code,
+						S.pro_name,
+						S.pro_price,
+						P.count,
+						P.price,
+						p.note
+					FROM
+						supplier_info T
+					INNER JOIN s_pro S ON T.id = S.supplier_id
+					INNER JOIN supplier_pro P ON s.id = p.pro_id
+					WHERE
+						p.id =#{id}
+		</select>
+		
+		<update id="doSupplierOrderModify">
+			update supplier_pro p set p.note =#{note} where p.id = #{id}
+		</update>
+		
+		<!-- 删除供应商 -->
+		<delete id="deleteSupplierOrderById">
+			DELETE FROM supplier_pro  WHERE ID =#{id}
+		</delete>
+		
+		<resultMap type="entity.Pro" id="ProDTO">
+			<result column="pro_name" property="proName" />
+			<result column="pro_code" property="proCode" />
+			<result column="pro_price" property="proPrice" />
+			<result column="supplier_id" property="supplierId" />
+			<result column="ID" property="id" />
+		</resultMap>
+		<select id="getListForPro" resultMap="ProDTO">
+			SELECT * FROM s_pro T 
+			
+		</select>
+		addSupplierOrder
+</mapper> 
+    

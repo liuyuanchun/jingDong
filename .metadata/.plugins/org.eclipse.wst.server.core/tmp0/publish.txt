@@ -1,0 +1,4 @@
+#Tomcat publish data
+#Wed May 16 20:17:51 CST 2018
+org.eclipse.jst.jee.server\:/binary\:E\:\\work\\bs\\jingDong\\WebRoot\\WEB-INF\\lib\\log4j-core-2.0-rc1.jar=WEB-INF/lib/log4j-core-2.0-rc1.jar
+org.eclipse.jst.jee.server\:/binary\:E\:\\work\\bs\\jingDong\\WebRoot\\WEB-INF\\lib\\spring-web-3.2.0.RELEASE.jar=WEB-INF/lib/spring-web-3.2.0.RELEASE.jar

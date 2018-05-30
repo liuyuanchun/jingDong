@@ -1,0 +1,96 @@
+package controller;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
+import entity.User;
+import service.HaqService;
+
+@Controller
+public class HaqController {
+	
+	@Autowired
+	HaqService haqService ;
+	
+	/**
+	 * 用户信息修改-根据用户编码获取用户实体类对象信息
+	 * @param userId
+	 * @return jsp
+	 * @author haq
+	 * @time 2018年5月6日17:41:48
+	 */
+	@RequestMapping(value="showUserModifyPage")
+	public ModelAndView showUserModifyPage(String userId){
+		ModelAndView mv = new ModelAndView("manage/user/modifyUserInfo");
+		User user = haqService.getUserInfoById(userId);
+		if(user==null){
+			user=new User();
+		}
+		mv.addObject("userDTO", user);
+		return mv;
+	}
+	
+	/**
+	 * 用户信息修改-点击保存按钮 修改用户信息
+	 * @param user
+	 * @return jsp
+	 * @author haq
+	 * @time 2018年5月6日18:55:54
+	 */
+	@RequestMapping(value="doUserModify")
+	@ResponseBody
+	public ModelAndView doUserModify(User user){
+		ModelAndView mv = new ModelAndView();
+		boolean flag = haqService.modifyUserInfo(user);
+		if(flag){
+			mv.setViewName("redirect:showMUser");
+		}else{
+			mv.setViewName("redirect:showUserModifyPage?userId="+user.getId());
+		}
+		return mv;
+	}
+	/**
+	 * 删除用户
+	 * @param userId
+	 * @return resultUtil
+	 */
+	@RequestMapping(value="doUserDeleteById")
+	public void doUserDeleteById(String userId,HttpServletResponse response){
+		boolean flag = haqService.deleteUserById(userId);
+		try {
+			PrintWriter out = response.getWriter();
+			if(flag){
+				out.print("200");
+			}else{
+				out.print("500");
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * 根据用户名或电话号码查询用户信息
+	 * @param user
+	 * @return jsp
+	 * @author haq
+	 * @time 2018年5月8日20:42:18
+	 */
+	@RequestMapping(value="searchUserForManage")
+	public ModelAndView searchUserForManage(User user){
+		ModelAndView mv = new ModelAndView("manage/user/personMessage");
+		List<User> userList=haqService.searchUserForManage(user);
+		mv.addObject("userDTO", user);
+		mv.addObject("userlist", userList);
+		return mv;
+	}
+}

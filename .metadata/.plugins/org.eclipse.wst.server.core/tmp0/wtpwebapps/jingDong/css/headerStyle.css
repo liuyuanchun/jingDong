@@ -1,0 +1,150 @@
+@CHARSET "UTF-8";
+@CHARSET "UTF-8";
+* {
+	margin: 0;
+	padding: 0;
+}
+#d1 {
+	font-family: "黑体";
+	font-size: 14px;
+	margin: 1px auto;
+	height: 25px;
+	background-color: #D2D2D2;
+	line-height: 25px;
+	position: relative;
+}
+#d11 {
+	position: absolute;
+	left: 50px;
+}
+#d12 {
+	position: absolute;
+	right: 10px;
+	bottom: 0px;
+	height: 18px;
+	line-height: 20px;
+}
+.u1 li {
+	list-style: none;
+	float: left;
+	right: 400px;
+	bottom: 2px;
+	width: 80px;
+	border-right: #666 1px solid;
+	margin-right: 2px;
+}
+#d2 {
+	margin: 1px auto;
+	width: 1210px;
+	height: 70px;
+	background-image: url(../images/book1.png);
+}
+#d3 {
+	margin: 1px auto;
+	height: 80px;
+	position: relative;
+}
+#d31 {
+	position: absolute;
+	left: 90px;
+	top: 10px;
+}
+#d32 {
+	width: 520px;
+	height: 32px;
+	position: absolute;
+	left: 450px;
+	top: 30px;
+}
+#d32 .text1 {
+	width: 454px;
+	height: 30px;
+	border: 2px #B61D1D solid;
+}
+#d32 .sousuo {
+	width: 65px;
+	height: 34px;
+	color: #FFF;
+	position: absolute;
+	left: 457px;
+	top: 0px;
+	background-color: #B61D1D;
+	text-align: center;
+	line-height: 33px;
+}
+#d33 {
+	width: 170px;
+	height: 35px;
+	background-color: #F6F6F6;
+	position: absolute;
+	left: 1070px;
+	top: 30px;
+}
+#d33 .shoppingCar {
+	position: absolute;
+	left: 25px;
+	top: 9px;
+	width: 20px;
+	height: 17px;
+	background-image: url(../images/jd2015img.png);
+	background-position: 1px -57px;
+}
+#d33 .word {
+	position: absolute;
+	top: 9px;
+	left: 50px;
+}
+#d34 {
+	position: absolute;
+	left: 450px;
+	top: 70px;
+	width: 500px;
+	height: 16px;
+}
+#d34 .menueu1 {
+	list-style: none;
+}
+#d34 .menueu1 li {
+	float: left;
+	width: 55px;
+	margin-right: 5px;
+	font-size: 12px;
+}
+#d4 {
+	margin: 1px auto;
+	height: 50px;
+	position: relative;
+	border-bottom: #B1191A 2px solid;
+}
+#d4 #d41 {
+	position: absolute;
+	top: 0px;
+	left: 70px;
+	width: 210px;
+	height: 50px;
+	background-color: #B1191A;
+	color: #FFF;
+	line-height: 50px;
+	font-family: "黑体";
+}
+#d4 #d41 .d411 {
+	position: absolute;
+	margin-left: 10px;
+}
+#d4 #d41 .d412 {
+	margin-left: 180px;
+}
+
+#d4 #d42 {
+	margin-left: 330px;
+	width: 750px;
+	height: 50px;
+}
+#d4 #d42 .menueu2 li {
+	list-style: none;
+	float: left;
+	width: 70px;
+	line-height: 50px;
+	font-family: "黑体";
+	margin-right: 6px;
+}

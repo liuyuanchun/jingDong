@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC   
+    "-//mybatis.org//DTD Mapper 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dao.CartDao">
+	<select id="searchAllCart" resultMap="cartAndProduct" parameterType="int">
+		SELECT c.id,c.u_id,c.p_id,c.num,c.count,p.name,p.picture,p.content,p.price FROM cart AS c INNER JOIN product AS p on c.p_id = p.id where u_id = #{userId};
+	</select>
+	<resultMap type="entity.Cart" id="cartAndProduct">
+		<id property="id" column="id"/>
+		<result property="uId" column="u_id"/>
+		<result property="pId" column="p_id"/>
+		<result property="num" column="num"/>
+		<result property="count" column="count"/>
+		<association property="product" column="p_id" javaType="entity.Product">
+		<id property="id" column="p_id"/>
+		<result property="name" column="name"/>
+		<result property="picture" column="picture"/>
+		<result property="content" column="content"/>
+		<result property="price" column="price"/>
+		</association>	
+	</resultMap>
+	
+	<select id="searchCartById" resultMap="cartAndProductById" parameterType="int">
+		SELECT c.id,c.u_id,c.p_id,c.num,c.count,
+p.name,p.picture,p.num AS maxNum ,p.content,p.price,p.s_id AS sId ,s.name AS sName
+ FROM cart AS c INNER JOIN product AS p ON c.p_id = p.id 
+ INNER JOIN small_type AS s ON s.id = p.s_id where p.id=#{pId} and c.u_id = #{userId};
+	</select>
+	<resultMap type="entity.Cart" id="cartAndProductById">
+		<id property="id" column="id"/>
+		<result property="uId" column="u_id"/>
+		<result property="pId" column="p_id"/>
+		<result property="num" column="num"/>
+		<result property="count" column="count"/>
+		<association property="product" column="p_id" javaType="entity.Product">
+		<id property="id" column="p_id"/>
+		<result property="name" column="name"/>
+		<result property="num" column="maxNum"/>
+		<result property="picture" column="picture"/>
+		<result property="content" column="content"/>
+		<result property="price" column="price"/>
+		<association property="smallType" column="s_id" javaType="entity.SmallType">
+		<id property="id" column="sId"/>
+		<result property="name" column="sName"/>
+		</association>
+		</association>	
+	</resultMap>
+	
+	<insert id="addToCart" parameterType="entity.Cart">
+		INSERT INTO cart(u_id,p_id,num,COUNT) VALUES(#{uId},#{pId},#{num},#{count});
+	</insert>
+	
+	<update id="updateToCart">
+		UPDATE cart SET num=#{num},COUNT=#{count} WHERE p_id=#{pId} and u_id=#{uId};
+	</update>
+	
+	<delete id="deleteFromCart">
+		DELETE FROM cart WHERE p_id=#{proId} and u_id=#{uId};
+	</delete>
+
+</mapper> 
+    

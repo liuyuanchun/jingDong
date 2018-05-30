@@ -1,0 +1,113 @@
+@CHARSET "UTF-8";
+*{
+	padding:0;
+	margin:0
+}
+#main{
+	width:1339;
+	height:700px;
+	overflow:hidden;
+}
+#header{
+	height:100px;
+}
+#log{
+	width:170px;
+	height:50px;
+	background-image:url(../images/icon.png);
+	margin-left:100px;
+	margin-top:30px;
+	float:left;
+}
+#huangyingdenglu{
+	float:left;
+	height:50px;
+	margin-top:30px;
+	margin-left:10px;
+	line-height:50px;
+	font-size:23px;
+}
+#dengluyemian{
+	
+	float:left;
+	width:220px;
+	height:20px;
+	margin-top:60px;
+	margin-left:650px;
+	overflow:hidden;
+}
+#huihua{
+	width:18px;
+	height:14px;
+	background-image:url(../images/q-icon.png);
+	float:left;
+	margin-right:5px;
+	margin-top:5px;
+}
+#content{
+	height:475px;
+	border-bottom:1px #666 solid;
+	background-image:url("../images/5938aad9N3407087a.jpg");
+	overflow:hidden;
+}
+#login{
+	width:350px;
+	height:400px;
+	background-color:#fff;
+	margin-left:650px;
+	margin-top:40px;
+}
+.zi{
+	font-weight:blod;
+	font-size:20px;
+	line-height:50px;
+	cursor:pointer;
+	color:black;
+}
+#login-box{
+	width:350px;
+	height:260px;
+	margin-top:20px;
+}
+#login-box .login-box-in{
+	width:250px;
+	height:40px;
+	margin:30px auto;
+	border:1px red solid;
+}
+.in{
+	height:37px;
+	 border:none;
+	outline:none; 
+}
+#login-foot{
+	width:350px;
+	height:60px;
+	margin-top:10px;
+	border-top:1px solid #F6F6F6;
+}
+#login-method li{
+	list-style:none;
+	float:left;
+	color:black;
+	font-size:15px;
+	margin-left:5px;
+}
+
+#footer{
+	height:100px;
+}
+.links{
+	margin-left:250px;
+	margin-top:30px;	
+}
+.links a{
+	color:black;	
+	cursor:pointer;
+	text-decoration:none;
+}
+.Copyright{
+	width:300px;
+	height:20px;
+	margin:10px auto;
+}

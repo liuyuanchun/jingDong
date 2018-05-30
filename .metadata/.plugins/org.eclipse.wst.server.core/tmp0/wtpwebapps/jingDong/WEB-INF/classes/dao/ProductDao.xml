@@ -1,0 +1,189 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC   
+    "-//mybatis.org//DTD Mapper 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dao.ProductDao">
+
+	<select id="searchAll" resultMap="allProduct">
+		SELECT p.id,p.NAME,p.price,p.num,p.picture,p.content,author,b.id AS bId,b.name AS bName,p.s_id AS sId,p.p_id AS pId,s.name AS sName,pu.name AS pName 
+		FROM product AS p LEFT JOIN small_type AS s ON p.s_id = s.id
+		INNER JOIN big_type AS b ON s.b_id = b.id
+		LEFT JOIN publishing AS pu ON p.p_id = pu.id limit 0,10 ;
+	</select>
+	<resultMap type="entity.Product" id="allProduct">
+		<id property="id" column="id"/>
+		<result property="name" column="name"/>
+		<result property="price" column="price"/>
+		<result property="num" column="num"/>
+		<result property="picture" column="picture"/>
+		<result property="content" column="content"/>
+		<result property="author" column="author"/>
+		<association property="smallType" column="s_id" javaType="entity.SmallType">
+			<id property="id" column="sId"/>
+			<result property="name" column="sName"/>
+			<association property="bigType" column="b_id" javaType="entity.BigType">
+				<id property="id" column="bId"/>
+				<result property="name" column="bName"/>
+			</association>
+		</association>
+		<association property="publishing" column="p_id" javaType="entity.Publishing" >
+			<id property="id" column="pId"/>
+			<result property="name" column="pName"/>
+		</association>
+	</resultMap>
+	
+	<select id="searchByCondition" resultMap="productByCondition">
+		SELECT p.id,p.NAME,p.price,p.num,p.picture,p.content,author,b.id AS bId,b.name AS bName,p.s_id AS sId,p.p_id AS pId,s.name AS sName,pu.name AS pName 
+		FROM product AS p LEFT JOIN small_type AS s ON p.s_id = s.id
+		INNER JOIN big_type AS b ON s.b_id = b.id
+		LEFT JOIN publishing AS pu ON p.p_id = pu.id where 1=1
+		<if test="condition.name != ''">
+			and p.name like '%${condition.name}%'
+		</if>
+		<if test="condition.smallType.name !=''">
+			and s.name = #{condition.smallType.name}
+		</if>
+		<if test="condition.price > -1">
+			and p.price = #{condition.price}
+		</if>
+		limit ${page},10 
+	</select>
+	<resultMap type="entity.Product" id="productByCondition">
+		<id property="id" column="id"/>
+		<result property="name" column="name"/>
+		<result property="price" column="price"/>
+		<result property="num" column="num"/>
+		<result property="picture" column="picture"/>
+		<result property="content" column="content"/>
+		<result property="author" column="author"/>
+		<association property="smallType" column="s_id" javaType="entity.SmallType">
+			<id property="id" column="sId"/>
+			<result property="name" column="sName"/>
+			<association property="bigType" column="b_id" javaType="entity.BigType">
+				<id property="id" column="bId"/>
+				<result property="name" column="bName"/>
+			</association>
+		</association>
+		<association property="publishing" column="p_id" javaType="entity.Publishing" >
+			<id property="id" column="pId"/>
+			<result property="name" column="pName"/>
+		</association>
+	</resultMap>
+	
+	<select id="searchCountByCondition" resultType="int">
+		SELECT count(p.id) FROM product AS p LEFT JOIN small_type AS s ON p.s_id = s.id
+		LEFT JOIN publishing AS pu ON p.p_id = pu.id where 1=1
+		<if test="condition.name != ''">
+			and p.name like '${condition.name}'
+		</if>
+		<if test="condition.smallType.name !=''">
+			and s.name = #{condition.smallType.name}
+		</if>
+		<if test="condition.price > -1">
+			and p.price = #{condition.price}
+		</if>
+	</select>
+	
+	
+	<select id="searchAllBysId"  resultMap="allProductBysId">
+		SELECT p.id,p.NAME,p.price,p.num,p.picture,p.content,author,b.id AS bId,b.name AS bName,p.s_id AS sId,p.p_id AS pId,s.name AS sName,pu.name AS pName 
+		FROM product AS p LEFT JOIN small_type AS s ON p.s_id = s.id
+		INNER JOIN big_type AS b ON s.b_id = b.id
+		LEFT JOIN publishing AS pu ON p.p_id = pu.id WHERE p.s_id = #{sId} limit 0,10 ;
+	</select>
+	<resultMap type="entity.Product" id="allProductBysId">
+		<id property="id" column="id"/>
+		<result property="name" column="name"/>
+		<result property="price" column="price"/>
+		<result property="num" column="num"/>
+		<result property="picture" column="picture"/>
+		<result property="content" column="content"/>
+		<result property="author" column="author"/>
+		<association property="smallType" column="s_id" javaType="entity.SmallType">
+			<id property="id" column="sId"/>
+			<result property="name" column="sName"/>
+			<association property="bigType" column="b_id" javaType="entity.BigType">
+				<id property="id" column="bId"/>
+				<result property="name" column="bName"/>
+			</association>
+		</association>
+		<association property="publishing" column="p_id" javaType="entity.Publishing" >
+			<id property="id" column="pId"/>
+			<result property="name" column="pName"/>
+		</association>
+	</resultMap>
+	
+	<select id="searchAllBybId" resultMap="allProductBybId">
+		SELECT p.id,p.NAME,p.price,p.num,p.picture,p.content,author,b.id AS bId,b.name AS bName,p.s_id AS sId,p.p_id AS pId,s.name AS sName,pu.name AS pName 
+		FROM product AS p LEFT JOIN small_type AS s ON p.s_id = s.id
+		INNER JOIN big_type AS b ON s.b_id = b.id
+		LEFT JOIN publishing AS pu ON p.p_id = pu.id WHERE p.s_id IN (SELECT id FROM small_type WHERE b_id =#{bId} ) LIMIT 0,10 ;
+	</select>
+	<resultMap type="entity.Product" id="allProductBybId">
+		<id property="id" column="id"/>
+		<result property="name" column="name"/>
+		<result property="price" column="price"/>
+		<result property="num" column="num"/>
+		<result property="picture" column="picture"/>
+		<result property="content" column="content"/>
+		<result property="author" column="author"/>
+		<association property="smallType" column="s_id" javaType="entity.SmallType">
+			<id property="id" column="sId"/>
+			<result property="name" column="sName"/>
+			<association property="bigType" column="b_id" javaType="entity.BigType">
+				<id property="id" column="bId"/>
+				<result property="name" column="bName"/>
+			</association>
+		</association>
+		<association property="publishing" column="p_id" javaType="entity.Publishing" >
+			<id property="id" column="pId"/>
+			<result property="name" column="pName"/>
+		</association>
+	</resultMap>
+	
+	<select id="searchById" resultMap="ProductById">
+		SELECT p.id,p.NAME,p.price,p.num,p.picture,p.content,author,b.id AS bId,b.name AS bName,p.s_id AS sId,p.p_id AS pId,s.name AS sName,pu.name AS pName 
+		FROM product AS p LEFT JOIN small_type AS s ON p.s_id = s.id
+		INNER JOIN big_type AS b ON s.b_id = b.id
+		LEFT JOIN publishing AS pu ON p.p_id = pu.id where p.id=#{proId};
+	</select>
+	<resultMap type="entity.Product" id="ProductById">
+		<id property="id" column="id"/>
+		<result property="name" column="name"/>
+		<result property="price" column="price"/>
+		<result property="num" column="num"/>
+		<result property="picture" column="picture"/>
+		<result property="content" column="content"/>
+		<result property="author" column="author"/>
+		<association property="smallType" column="s_id" javaType="entity.SmallType">
+			<id property="id" column="sId"/>
+			<result property="name" column="sName"/>
+			<association property="bigType" column="b_id" javaType="entity.BigType">
+				<id property="id" column="bId"/>
+				<result property="name" column="bName"/>
+			</association>
+		</association>
+		<association property="publishing" column="p_id" javaType="entity.Publishing" >
+			<id property="id" column="pId"/>
+			<result property="name" column="pName"/>
+		</association>
+	</resultMap>
+	
+	<insert id="addProduct">
+		INSERT INTO product(NAME,price,num,picture,content,author,s_id,p_id) VALUES(#{name},#{price},#{num},#{picture},#{content},#{author},#{smallType.id},#{publishing.id});
+	</insert>
+	
+	<delete id="deleteProductByproId">
+		delete from product where id = #{proId}
+	</delete>
+	
+	<update id="updateProduct">
+		UPDATE product SET NAME=#{name},price =#{price},num = #{num},picture=#{picture},content=#{content}, author = #{author},s_id=#{smallType.id},p_id=#{publishing.id} WHERE id = #{id};
+	</update>
+	
+	<update id="updateSTOfPro">
+		UPDATE product SET s_id = 0 WHERE s_id = #{sId};
+	</update>
+</mapper> 
+    
