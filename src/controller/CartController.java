@@ -42,7 +42,7 @@ public class CartController {
 			cart.setNum(nums);
 			boolean flag = cs.addToCart(cart);
 			if(flag){
-				return "添加成功";
+				return "添加成功！";
 			}else{
 				return "添加失败。。";
 			}
