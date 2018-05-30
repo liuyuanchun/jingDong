@@ -44,7 +44,7 @@ public class CartController {
 			if(flag){
 				return "添加成功";
 			}else{
-				return "添加失败";
+				return "添加失败。。";
 			}
 		}else{
 			return "noLogin";
