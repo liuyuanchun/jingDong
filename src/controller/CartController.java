@@ -50,6 +50,7 @@ public class CartController {
 			return "noLogin";
 		}
 	}
+	
 	@RequestMapping(value="deleteFromCart")
 	public ModelAndView deleteFromCart(Integer proId,HttpServletRequest request){
 		ModelAndView mv = new ModelAndView();
